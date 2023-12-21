@@ -17,27 +17,34 @@
       }
 
       #game-container {
-        background-color: #fff;
+        background-color: #f5f5f5; /* 更浅的背景色 */
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 15px; /* 更大的圆角 */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* 更明显的阴影 */
+        border: 2px solid #3778e5; /* 添加鲜艳的边框 */
       }
 
       .card {
         cursor: pointer;
-        border: 1px solid #ddd;
+        border: 2px solid #3778e5; /* 更鲜艳的边框颜色 */
         padding: 15px;
         margin: 15px;
         width: 200px;
         text-align: center;
-        border-radius: 10px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease;
+        border-radius: 15px; /* 更大的圆角 */
+        background: linear-gradient(to bottom, #fff, #f5f5f5); /* 背景渐变 */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 更明显的阴影 */
+        transition: all 0.3s ease; /* 可以使所有属性都有过渡效果 */
       }
 
       .card:hover {
-        background-color: #f5f5f5;
+        background: linear-gradient(
+          to bottom,
+          #f5f5f5,
+          #fff
+        ); /* 反向的渐变效果 */
+        transform: scale(1.05); /* 稍微放大 */
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
       }
       #story-summary {
         width: 400px;
