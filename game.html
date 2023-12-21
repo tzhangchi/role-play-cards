@@ -38,6 +38,24 @@
       .card:hover {
         background-color: #f5f5f5;
       }
+      #story-summary {
+        width: 400px;
+        margin-top: 20px;
+        margin-left: 20px;
+        padding: 15px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+      }
+
+      #story-summary.show {
+        max-height: 500px; /* Adjust the max height as needed */
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
@@ -151,7 +169,8 @@
       function displayStorySummary(summary) {
         // Assuming you have a specific element to display the summary
         const summaryContainer = document.getElementById("story-summary");
-        summaryContainer.innerText = summary;
+        summaryContainer.innerHTML = summary;
+        summaryContainer.classList.add("show");
       }
 
       // Initial UI update
