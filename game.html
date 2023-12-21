@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Selection Game</title>
+    <style>
+      body {
+        background-color: #f8f8f8;
+        font-family: "Arial", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #game-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .card {
+        cursor: pointer;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 15px;
+        width: 200px;
+        text-align: center;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+      }
+
+      .card:hover {
+        background-color: #f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <h1 style="text-align: center; color: #333">二次元风格卡牌选择游戏</h1>
+      <div id="card-selection">
+        <!-- This will be dynamically populated -->
+      </div>
+    </div>
+    <!-- Add this div in your HTML body -->
+    <div id="story-summary"></div>
+    <script>
+      let selectedCards = {};
+      let currentProcess = 1;
+
+      // Define the card data for each process
+      const cardData = {
+        1: ["Adventure", "Romance", "Fantasy"],
+        2: ["Adventurer", "Artist", "Mage"],
+        3: ["Optimistic", "Persistent Dreamer", "Mysterious"],
+        4: ["Thrilling Crisis", "Friendship Light", "Fateful Decision"],
+        5: ["Thrilling Crisis", "Friendship Light", "Fateful Decision"],
+        6: ["Heroic Victory", "Romantic Triumph", "Mystical Ending"],
+      };
+
+      // Function to update the UI based on the current process
+      function updateUI() {
+        const cardSelectionDiv = document.getElementById("card-selection");
+        cardSelectionDiv.innerHTML = ""; // Clear previous content
+
+        const cards = cardData[currentProcess];
+        cards.forEach((cardType) => {
+          const cardElement = document.createElement("div");
+          cardElement.classList.add("card");
+          cardElement.textContent = cardType;
+          cardElement.addEventListener("click", () => selectCard(cardType));
+          cardSelectionDiv.appendChild(cardElement);
+        });
+      }
+
+      // Function to handle card selection
+      function selectCard(cardType) {
+        selectedCards[currentProcess] = cardType;
+
+        if (currentProcess < 6) {
+          currentProcess++;
+          updateUI();
+        } else {
+          finishGame();
+        }
+      }
+
+      // Function to finish the game and output a story summary
+      function finishGame() {
+        alert("Congratulations! You have completed the game.");
+        console.log(selectedCards);
+
+        const storySummary = generateStorySummary(selectedCards);
+        displayStorySummary(storySummary);
+      }
+
+      // Function to generate a story summary based on selected cards
+      function generateStorySummary(selectedCards) {
+        const storyTypes = {
+          Adventure: "你踏上了一场充满冒险和危险的旅程。",
+          Romance: "在浪漫的世界里，你寻找并找到了真爱。",
+          Fantasy: "你进入了一个奇幻的王国，发现了魔法和神秘的生物。",
+        };
+
+        const mainCharacters = {
+          Adventurer: "你选择了勇敢的冒险者作为主人翁。",
+          Artist: "你选择了富有创造力和浪漫的艺术家作为主人翁。",
+          Mage: "你选择了拥有强大魔法力量的神秘法师作为主人翁。",
+        };
+
+        const characterPersonalities = {
+          Optimistic: "你的主人翁是一个乐观的冒险家，总是积极向前。",
+          "Persistent Dreamer":
+            "你的主人翁是一个坚韧的梦想家，追求自己的梦想。",
+          Mysterious: "你的主人翁内心深沉，充满神秘感。",
+        };
+
+        const storyPlots = {
+          "Thrilling Crisis":
+            "在冒险中，你经历了一系列的紧张危机，需要勇气和智慧来解决。",
+          "Friendship Light":
+            "你与伙伴结下深厚的友谊，在友情的光辉中战胜了困难。",
+          "Fateful Decision":
+            "你面临着重大的抉择，这决定了你的命运和故事的走向。",
+        };
+
+        const storyEndings = {
+          "Heroic Victory": "最终，你取得了英雄般的胜利，成为传说中的人物。",
+          "Romantic Triumph": "你在爱情中取得了辉煌的胜利，赢得了真爱的芳心。",
+          "Mystical Ending": "故事以神秘的结局结束，留下让人深思的印象。",
+        };
+
+        // Generate the story summary based on selected cards
+        const summary =
+          `故事类型：${storyTypes[selectedCards[1]]}\n` +
+          `主人翁：${mainCharacters[selectedCards[2]]}\n` +
+          `性格：${characterPersonalities[selectedCards[3]]}\n` +
+          `情节1：${storyPlots[selectedCards[4]]}\n` +
+          `情节2：${storyPlots[selectedCards[5]]}\n` +
+          `结局：${storyEndings[selectedCards[6]]}`;
+
+        return summary;
+      }
+
+      // Function to display the story summary (you can customize this part)
+      function displayStorySummary(summary) {
+        // Assuming you have a specific element to display the summary
+        const summaryContainer = document.getElementById("story-summary");
+        summaryContainer.innerText = summary;
+      }
+
+      // Initial UI update
+      updateUI();
+    </script>
+  </body>
+</html>
